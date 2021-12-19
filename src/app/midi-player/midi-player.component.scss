@@ -1,0 +1,41 @@
+.inner {
+  margin: 0 10px 20px 10px;
+}
+
+button {
+  background: #fff;
+  border: 0;
+  border-radius: 6px;
+  color: var(--midi-output-color);
+  height: 60px;
+  position: relative;
+  width: 60px;
+}
+
+.icon {
+  display: block;
+  height: 40px;
+  left: 50%;
+  line-height: 3.2rem;
+  position: absolute;
+  top: 50%;
+  width: 40px;
+}
+
+.icon.play {
+  font-size: 4rem;
+  margin: -20px 0 0 -17px;
+}
+
+.icon.pause {
+  font-size: 5rem;
+  margin: -20px 0 0 -20px;
+}
+
+.title {
+  margin: 20px 0 0;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

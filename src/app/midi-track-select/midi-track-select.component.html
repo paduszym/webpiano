@@ -1,0 +1,37 @@
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <button type="button" [disabled]="disabled" (click)="fileInput.click()">
+      Load track from MIDI file...
+    </button>
+
+    <button *ngIf="_recordsList.notEmpty$ | async"
+            type="button" [disabled]="disabled" (click)="_recordsListVisible = true">
+      Load recorded track...
+    </button>
+
+    <button *ngIf="(_recordsList.latestRecord$ | async) as latestRecord"
+            type="button" [disabled]="disabled" (click)="_selectTrackFromRecord(latestRecord)">
+      Load last recorded track
+    </button>
+  </div>
+</div>
+
+<div *ngIf="_recordsListVisible"
+     class="records-list-overlay">
+  <div class="records-list-modal">
+    <h3>Select record</h3>
+    <ul>
+      <li *ngFor="let record of (_recordsList.items$ | async)" (click)="_selectTrackFromRecordsList(record)">
+        <span class="item-content">
+          {{record.title}}
+          <small>{{record.date | date: 'yyyy-MM-dd HH:mm:ss'}}</small>
+        </span>
+      </li>
+    </ul>
+    <div class="records-list-close">
+      <button (click)="_recordsListVisible = false">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<input #fileInput class="sr-only" type="file" accept=".mid,.midi" (change)="_selectTrackFromFile(fileInput.files)">

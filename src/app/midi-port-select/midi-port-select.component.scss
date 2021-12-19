@@ -1,0 +1,25 @@
+.inner {
+  align-items: center;
+  display: flex;
+  padding: 10px;
+}
+
+label {
+  flex: 0 0 55px;
+  padding: 0 10px 0 0;
+  text-align: right;
+}
+
+select {
+  border: 1px solid #fff;
+  background: #555;
+  color: #fff;
+  flex: 1 auto;
+  height: 30px;
+  min-width: 0;
+}
+
+option {
+  background: #000;
+  color: #fff;
+}

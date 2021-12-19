@@ -1,0 +1,185 @@
+.container {
+  --white-keys-count: 88;
+  --white-key-width: calc(var(--keyboard-width) / var(--white-keys-count));
+  --white-key-height: calc(6.81 * var(--white-key-width));
+  --black-key-width: calc(.6 * var(--white-key-width));
+  --black-key-height: calc(.66 * var(--white-key-height));
+  --sustain-indicator-size: calc(.7 * var(--white-key-width));
+  width: var(--keyboard-width);
+}
+
+.sustain {
+  align-items: center;
+  display: flex;
+}
+
+.sustain-label,
+.show-notes-checkbox {
+  font-size: calc(.8 * var(--sustain-indicator-size));
+  line-height: 1;
+}
+
+.sustain-indicator {
+  background: #fff;
+  border-radius: 100%;
+  height: var(--sustain-indicator-size);
+  margin: 10px calc(.4 * var(--sustain-indicator-size)) 10px 10px;
+  overflow: hidden;
+  position: relative;
+  width: var(--sustain-indicator-size);
+
+  &::before,
+  &::after {
+    content: '';
+    height: 100%;
+    opacity: .5;
+    position: absolute;
+    width: 100%;
+  }
+
+  &.input-pushed::before {
+    background: var(--midi-input-color);
+  }
+
+  &.output-pushed::after {
+    background: var(--midi-output-color);
+  }
+}
+
+.panel {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.show-notes-checkbox {
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  padding-right: 10px;
+
+  input {
+    margin-right: calc(.4 * var(--sustain-indicator-size));
+    height: var(--sustain-indicator-size);
+    width: var(--sustain-indicator-size);
+  }
+}
+
+.keys {
+  border-top: 1px solid #555;
+  display: flex;
+}
+
+.key {
+  display: flex;
+}
+
+.key-inner {
+  position: relative;
+}
+
+.key-velocity-layer {
+  --velocity: 0;
+  height: 100%;
+  left: 0;
+  opacity: var(--velocity);
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  &.output {
+    background: var(--midi-output-color);
+  }
+
+  &.input {
+    background: var(--midi-input-color);
+  }
+}
+
+.key.white {
+  background: #fff;
+  border-right: 1px solid #555;
+  font-size: calc(.07 * var(--white-key-height));
+  height: var(--white-key-height);
+  width: var(--white-key-width);
+
+  .key-inner {
+    color: #000;
+    height: 100%;
+    width: 100%;
+  }
+
+  &:last-child {
+    border-right: 0;
+  }
+}
+
+.key.black {
+  font-size: calc(.07 * var(--black-key-height));
+  position: relative;
+  overflow: visible;
+  width: 0;
+
+  .key-inner {
+    background: #000;
+    border: 1px solid #000;
+    border-top: 0;
+    height: var(--black-key-height);
+    position: absolute;
+    width: var(--black-key-width);
+    z-index: 1;
+  }
+
+  &.active .key-inner {
+    background: #fff;
+    color: #000;
+  }
+
+  &[data-pitch='C#'],
+  &[data-pitch='F#'] {
+
+    .key-inner {
+      margin-left: calc(-1 * var(--white-key-width));
+    }
+  }
+
+  &[data-pitch='D#'],
+  &[data-pitch='A#'] {
+
+    .key-inner {
+      margin-right: calc(-1 * var(--white-key-width));
+    }
+  }
+
+  &[data-pitch='C#'] .key-inner {
+    left: calc(var(--white-key-width) - .66 * var(--black-key-width));
+  }
+
+  &[data-pitch='D#'] .key-inner {
+    right: calc(var(--white-key-width) - .66 * var(--black-key-width));
+  }
+
+  &[data-pitch='F#'] .key-inner {
+    left: calc(var(--white-key-width) - .75 * var(--black-key-width));
+  }
+
+  &[data-pitch='G#'] .key-inner {
+    left: calc(-.5 * var(--black-key-width));
+  }
+
+  &[data-pitch='A#'] .key-inner {
+    right: calc(var(--white-key-width) - .75 * var(--black-key-width));
+  }
+}
+
+.key-note-label {
+  bottom: 0;
+  display: none;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.keys.with-note-names .key-note-label {
+  display: inline;
+}

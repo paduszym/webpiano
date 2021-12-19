@@ -1,0 +1,16 @@
+<div class="inner">
+  <div class="clock">
+    <div class="controls" [ngSwitch]="playing$ | async">
+      <button *ngSwitchCase="false" [disabled]="!track" (click)="_play()">
+        <span class="icon play">&#9654;</span>
+      </button>
+      <button *ngSwitchCase="true" [disabled]="!track" (click)="_pause()">
+        <span class="icon pause">&#x23F8;</span>
+      </button>
+    </div>
+    <code class="time">{{_time$ | async | formatTime}} / {{track?.duration | formatTime}}</code>
+  </div>
+  <div *ngIf="track" class="title">
+    <em>{{track.title}}</em>
+  </div>
+</div>

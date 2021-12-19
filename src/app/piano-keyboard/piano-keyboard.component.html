@@ -1,0 +1,31 @@
+<div class="container" [attr.style]="'--white-keys-count: ' + _whiteKeysCount">
+  <div class="panel">
+    <div class="sustain">
+      <div class="sustain-indicator"
+           [class.input-pushed]="_sustain.inputPushed$ | async"
+           [class.output-pushed]="_sustain.outputPushed$ | async">
+      </div>
+      <span class="sustain-label">Sustain</span>
+    </div>
+    <div class="show-notes">
+      <label class="show-notes-checkbox">
+        <input type="checkbox" [(ngModel)]="showNoteNames" (ngModelChange)="showNoteNamesChange.emit($event)"> Show note names
+      </label>
+    </div>
+  </div>
+  <div class="keys"
+       [class.with-note-names]="showNoteNames">
+    <div *ngFor="let key of _keys"
+         class="key"
+         [ngClass]="key.color"
+         [class.active]="key.active$ | async"
+         [attr.data-pitch]="key.note.pitch"
+         [attr.data-octave]="key.note.octave">
+      <div class="key-inner">
+        <div class="key-velocity-layer input" [attr.style]="'--velocity: ' + (key.inputVelocity$ | async)"></div>
+        <div class="key-velocity-layer output" [attr.style]="'--velocity: ' + (key.outputVelocity$ | async)"></div>
+        <div class="key-note-label">{{key.note.pitch}}<sub>{{key.note.octave}}</sub></div>
+      </div>
+    </div>
+  </div>
+</div>

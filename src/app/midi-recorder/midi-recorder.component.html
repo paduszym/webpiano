@@ -1,0 +1,17 @@
+<div class="inner">
+  <div class="clock">
+    <div class="controls" [ngSwitch]="recording$ | async">
+      <button *ngSwitchCase="false" (click)="_record()">
+        <span class="icon record"></span>
+      </button>
+      <button *ngSwitchCase="true" (click)="_stop()">
+        <span class="icon stop"></span>
+      </button>
+    </div>
+    <code class="time">{{_time$ | async | formatTime}}</code>
+  </div>
+  <div *ngIf="recording$ | async" class="recording-label">
+    <span class="dot" [class.active]="_recordingDotVisible$ | async"></span>
+    <em>Recording input...</em>
+  </div>
+</div>

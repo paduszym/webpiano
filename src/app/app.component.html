@@ -1,0 +1,56 @@
+<div class="tabs-list">
+  <button type="button" class="tab-header output"
+          [disabled]="recorder.recording$ | async"
+          [class.active]="_activeTab === 'output'"
+          (click)="_activateTab('output')">
+    Play
+  </button>
+  <button type="button" class="tab-header input"
+          [disabled]="player.playing$ | async"
+          [class.active]="_activeTab === 'input'"
+          (click)="_activateTab('input')">
+    Record
+  </button>
+</div>
+
+<div class="tab-content" [hidden]="_activeTab === 'input'">
+  <wpn-midi-port-select [label]="'Output'"
+                        [disabled]="player.playing$ | async"
+                        [ports]="_ports.outputs$ | async"
+                        [port]="_initialOutputPort$ | async" (portChange)="_outputPortChanged($event)">
+  </wpn-midi-port-select>
+
+  <div class="controls">
+    <div>
+      <wpn-midi-player #player [outputPort]="_outputPort" [track]="_track">
+      </wpn-midi-player>
+
+      <wpn-midi-track-select [disabled]="player.playing$ | async" (trackChange)="_track = $event">
+      </wpn-midi-track-select>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" [hidden]="_activeTab === 'output'">
+  <wpn-midi-port-select [label]="'Input'"
+                        [disabled]="recorder.recording$ | async"
+                        [ports]="_ports.inputs$ | async"
+                        [port]="_initialInputPort$ | async"
+                        (portChange)="_inputPortChanged($event)">
+  </wpn-midi-port-select>
+
+  <div class="controls">
+    <div>
+      <wpn-midi-recorder #recorder [inputPort]="_inputPort">
+      </wpn-midi-recorder>
+
+      <wpn-midi-records-manager [disabled]="recorder.recording$ | async">
+      </wpn-midi-records-manager>
+    </div>
+  </div>
+</div>
+
+<wpn-piano-keyboard [(showNoteNames)]="_pianoShowNotes" (showNoteNamesChange)="_pianoShowNotesChanged($event)"
+                    [startNote]="_pianoStartNote" [endNote]="_pianoEndNote"
+                    [inputPort]="_inputPort" [outputPort]="_outputPort">
+</wpn-piano-keyboard>

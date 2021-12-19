@@ -1,0 +1,35 @@
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <button type="button" [disabled]="disabled" (click)="_recordsListVisible = true">
+      Show records list...
+    </button>
+
+    <button *ngIf="_recordsList.notEmpty$ | async"
+            type="button" [disabled]="disabled" (click)="_clearRecordsList()">
+      Clear records list
+    </button>
+  </div>
+</div>
+
+<div *ngIf="_recordsListVisible"
+     class="records-list-overlay">
+  <div class="records-list-modal">
+    <h3>Records list</h3>
+    <ul *ngIf="_recordsList.notEmpty$ | async; else emptyListTemplate">
+      <li *ngFor="let record of (_recordsList.items$ | async)">
+        <span class="item-content">
+          {{record.title}}
+          <small>{{record.date | date: 'yyyy-MM-dd HH:mm:ss'}}</small>
+        </span>
+        <span class="item-actions">
+          <button type="button" (click)="_saveAsMidi(record)">Save as MIDI...</button>
+          <button type="button" (click)="_deleteRecord(record)">Delete</button>
+        </span>
+      </li>
+    </ul>
+    <ng-template #emptyListTemplate>No records found.</ng-template>
+    <div class="records-list-close">
+      <button (click)="_recordsListVisible = false">Close</button>
+    </div>
+  </div>
+</div>
