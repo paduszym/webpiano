@@ -37,12 +37,8 @@
     width: 100%;
   }
 
-  &.input-pushed::before {
-    background: var(--midi-input-color);
-  }
-
-  &.output-pushed::after {
-    background: var(--midi-output-color);
+  &.pushed::before {
+    background: var(--keyboard-active-key-color);
   }
 }
 
@@ -80,20 +76,13 @@
 
 .key-velocity-layer {
   --velocity: 0;
+  background: var(--keyboard-active-key-color);
   height: 100%;
   left: 0;
   opacity: var(--velocity);
   position: absolute;
   top: 0;
   width: 100%;
-
-  &.output {
-    background: var(--midi-output-color);
-  }
-
-  &.input {
-    background: var(--midi-input-color);
-  }
 }
 
 .key.white {

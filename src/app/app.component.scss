@@ -42,3 +42,14 @@
   flex: 1 auto;
   justify-content: center;
 }
+
+.keyboard {
+
+  &.input {
+    --keyboard-active-key-color: var(--midi-input-color);
+  }
+
+  &.output {
+    --keyboard-active-key-color: var(--midi-output-color);
+  }
+}

@@ -2,8 +2,7 @@
   <div class="panel">
     <div class="sustain">
       <div class="sustain-indicator"
-           [class.input-pushed]="_sustain.inputPushed$ | async"
-           [class.output-pushed]="_sustain.outputPushed$ | async">
+           [class.pushed]="_sustain.pushed$ | async">
       </div>
       <span class="sustain-label">Sustain</span>
     </div>
@@ -22,8 +21,7 @@
          [attr.data-pitch]="key.note.pitch"
          [attr.data-octave]="key.note.octave">
       <div class="key-inner">
-        <div class="key-velocity-layer input" [attr.style]="'--velocity: ' + (key.inputVelocity$ | async)"></div>
-        <div class="key-velocity-layer output" [attr.style]="'--velocity: ' + (key.outputVelocity$ | async)"></div>
+        <div class="key-velocity-layer" [attr.style]="'--velocity: ' + (key.velocity$ | async)"></div>
         <div class="key-note-label">{{key.note.pitch}}<sub>{{key.note.octave}}</sub></div>
       </div>
     </div>

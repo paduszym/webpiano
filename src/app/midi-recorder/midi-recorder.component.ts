@@ -1,6 +1,6 @@
 import {formatDate} from '@angular/common';
 import {ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {filter, map, Observable, shareReplay} from 'rxjs';
+import {Observable, shareReplay} from 'rxjs';
 
 import {MidiInputPort} from '../midi-port/midi-input-port';
 import {MidiRecordsList} from '../midi-records-list/midi-records-list.service';
@@ -17,11 +17,6 @@ import {MidiRecorder} from './midi-recorder.service';
 export class MidiRecorderComponent implements OnChanges {
 
   readonly _time$: Observable<number> = this._recorder.time$.pipe(shareReplay(1));
-
-  readonly _recordingDotVisible$: Observable<boolean> = this._time$.pipe(
-    filter(time => time % 500 === 0),
-    map(time => time % 1000 === 0),
-  );
 
   readonly recording$: Observable<boolean> = this._recorder.recording$.pipe(shareReplay(1));
 

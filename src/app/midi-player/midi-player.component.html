@@ -2,10 +2,10 @@
   <div class="clock">
     <div class="controls" [ngSwitch]="playing$ | async">
       <button *ngSwitchCase="false" [disabled]="!track" (click)="_play()">
-        <span class="icon play">&#9654;</span>
+        <span class="icon play"></span>
       </button>
       <button *ngSwitchCase="true" [disabled]="!track" (click)="_pause()">
-        <span class="icon pause">&#x23F8;</span>
+        <span class="icon pause"></span>
       </button>
     </div>
     <code class="time">{{_time$ | async | formatTime}} / {{track?.duration | formatTime}}</code>

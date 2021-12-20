@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {MidiInputPort} from '../midi-port/midi-input-port';
-import {MidiOutputPort} from '../midi-port/midi-output-port';
+import {MidiPort} from '../midi-port/midi-port';
 
 import {Note} from '../note/note';
 
@@ -28,10 +27,7 @@ export class PianoKeyboardComponent implements OnChanges {
   readonly showNoteNamesChange: EventEmitter<boolean> = new EventEmitter(false);
 
   @Input()
-  inputPort: MidiInputPort;
-
-  @Input()
-  outputPort: MidiOutputPort;
+  port: MidiPort;
 
   @Input()
   startNote: Note;
@@ -40,12 +36,12 @@ export class PianoKeyboardComponent implements OnChanges {
   endNote: Note;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['inputPort'] || changes['outputPort'] || changes['startNote'] || changes['endNote']) {
+    if (changes['port'] || changes['startNote'] || changes['endNote']) {
       const keyboardNotes: Note[] = Note.range(this.startNote, this.endNote);
 
-      this._keys = keyboardNotes.map(note => new PianoKey(note, this.inputPort, this.outputPort));
+      this._keys = keyboardNotes.map(note => new PianoKey(note, this.port));
       this._whiteKeysCount = keyboardNotes.filter(({pitch}) => !pitch.endsWith('#')).length;
-      this._sustain = new PianoSustain(this.inputPort, this.outputPort);
+      this._sustain = new PianoSustain(this.port);
     }
   }
 }

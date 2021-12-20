@@ -3,33 +3,33 @@
 }
 
 button {
+  align-items: center;
   background: #fff;
   border: 0;
   border-radius: 6px;
   color: var(--midi-output-color);
+  display: flex;
   height: 60px;
-  position: relative;
+  justify-content: center;
   width: 60px;
 }
 
 .icon {
   display: block;
-  height: 40px;
-  left: 50%;
-  line-height: 3.2rem;
-  position: absolute;
-  top: 50%;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }
 
 .icon.play {
-  font-size: 4rem;
-  margin: -20px 0 0 -17px;
+  border-bottom: 15px solid transparent;
+  border-left: 30px solid;
+  border-top: 15px solid transparent;
 }
 
 .icon.pause {
-  font-size: 5rem;
-  margin: -20px 0 0 -20px;
+  border-left: 10px solid;
+  border-right: 10px solid;
+  width: 26px;
 }
 
 .title {
