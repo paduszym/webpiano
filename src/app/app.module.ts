@@ -6,6 +6,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {ngProdModeEnabled} from '../env/env';
 
 import {AppComponent} from './app.component';
+import {ErrorHandlerModule} from './error-handler/error-handler.module';
 import {MidiPlayerModule} from './midi-player/midi-player.module';
 import {MidiPortSelectModule} from './midi-port-select/midi-port-select.module';
 import {MidiRecorderModule} from './midi-recorder/midi-recorder.module';
@@ -24,6 +25,7 @@ import {PianoKeyboardModule} from './piano-keyboard/piano-keyboard.module';
       registrationStrategy: 'registerWhenStable:30000',
     }),
     /**/
+    ErrorHandlerModule,
     MidiRecordsDbModule,
     MidiRecordsManagerModule,
     MidiTrackSelectModule,

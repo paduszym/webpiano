@@ -32,6 +32,7 @@ export class AppComponent {
   }
 
   _activateTab(tab: WebMidi.MIDIPortType): void {
+    console.log(this._track.chunksCount);
     this._activeTab = tab;
     localStorage.setItem('webpiano.activeTab', this._activeTab);
   }

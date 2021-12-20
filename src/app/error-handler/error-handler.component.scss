@@ -1,0 +1,29 @@
+.container {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 30px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 99999;
+}
+
+.inner {
+  border: 1px solid;
+  background: #111;
+  color: #f00;
+  max-height: 80vh;
+  max-width: 80vh;
+  overflow: auto;
+  padding: 30px;
+}
+
+h1 {
+  margin: 0 0 10px;
+}
+
+pre {
+  margin: 0;
+}

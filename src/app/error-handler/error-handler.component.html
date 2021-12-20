@@ -1,0 +1,6 @@
+<div *ngIf="(_errorHandler.error$ | async) as _error" class="container">
+  <div class="inner">
+    <h1>ERROR!</h1>
+    <pre>{{_error}}</pre>
+  </div>
+</div>
