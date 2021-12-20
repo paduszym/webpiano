@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
+
 import {MidiInputPort} from './midi-port/midi-input-port';
 import {MidiOutputPort} from './midi-port/midi-output-port';
-
 import {MidiPorts} from './midi-ports/midi-ports.service';
 import {MidiTrack} from './midi/midi-track';
 import {Note} from './note/note';
@@ -24,7 +24,7 @@ export class AppComponent {
 
   _inputPort: MidiInputPort = this._ports.getInputById(localStorage.getItem(`webpiano.port.input`) || null);
 
-  _outputPort: MidiOutputPort = this._ports.getOutputById(localStorage.getItem(`webpiano.port.input`) || null);
+  _outputPort: MidiOutputPort = this._ports.getOutputById(localStorage.getItem(`webpiano.port.output`) || null);
 
   _track: MidiTrack;
 
@@ -36,12 +36,12 @@ export class AppComponent {
     localStorage.setItem('webpiano.activeTab', this._activeTab);
   }
 
-  _outputPortChanged(port: MidiOutputPort): void {
-    localStorage.setItem('webpiano.port.output', port.id);
-  }
-
   _inputPortChanged(port: MidiInputPort): void {
     localStorage.setItem('webpiano.port.input', port.id);
+  }
+
+  _outputPortChanged(port: MidiOutputPort): void {
+    localStorage.setItem('webpiano.port.output', port.id);
   }
 
   _pianoShowNotesChanged(showNotes: boolean): void {
