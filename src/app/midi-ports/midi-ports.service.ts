@@ -3,10 +3,9 @@ import {BehaviorSubject, fromEvent, Subject, takeUntil} from 'rxjs';
 
 import {BrowserMidiNativeInputPort} from '../browser-midi-native-input-port/browser-midi-native-input-port.service';
 import {BrowserMidiNativeOutputPort} from '../browser-midi-native-output-port/browser-midi-native-output-port.service';
-
 import {MidiInputPort} from '../midi-port/midi-input-port';
 import {MidiOutputPort} from '../midi-port/midi-output-port';
-import {MIDI_ACCESS} from './midi-access';
+import {MIDI_ACCESS} from '../midi-access/midi-access';
 
 @Injectable({
   providedIn: 'root',

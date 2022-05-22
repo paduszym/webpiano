@@ -1,4 +1,4 @@
-import {fromEvent, Observable, tap} from 'rxjs';
+import {fromEvent, Observable} from 'rxjs';
 
 import {MidiPort} from './midi-port';
 

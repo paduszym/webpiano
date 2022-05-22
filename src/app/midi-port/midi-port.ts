@@ -1,6 +1,7 @@
 import {filter, fromEvent, map, Observable, share, startWith, Subject} from 'rxjs';
 
 import {Note} from '../note/note';
+
 import {MidiNoteStatus} from './midi-note-status';
 
 export abstract class MidiPort {
@@ -38,7 +39,8 @@ export abstract class MidiPort {
 
   readonly noteStatus$: Observable<MidiNoteStatus> = this.message$.pipe(
     filter(({data: [status]}) => status === 0x80 || status === 0x90),
-    map(({data: [, code, velocity]}) => ({note: Note.fromCode(code), velocity})),
+    map(({data: [status, code, velocity]}) => ([code, status === 0x90 ? velocity : 0])),
+    map(([code, velocity]) => ({note: Note.fromCode(code), velocity})),
   );
 
   get clear$(): Observable<void> {
